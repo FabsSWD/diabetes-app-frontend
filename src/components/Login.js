@@ -9,7 +9,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      // First, check if the user exists
+      // Primero, verifica si el usuario existe
       const userExistsResponse = await axios.get('http://localhost:8085/user/exists', {
         params: {
           username: username,
@@ -21,7 +21,7 @@ export default function Login() {
         return;
       }
 
-      // If user exists, validate the password
+      // Si el usuario existe, valida la contraseña
       const response = await axios.post('http://localhost:8085/user/validate', null, {
         params: {
           username: username,
@@ -30,7 +30,7 @@ export default function Login() {
       });
 
       if (response.data === true) {
-        // Redirect or indicate successful login
+        // Redireccionar o indicar inicio de sesión exitoso
         alert('Login successful');
       } else {
         setError('Invalid password');

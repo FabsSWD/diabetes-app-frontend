@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Appbar from './components/Appbar';
-import Login from './components/Login'; // Importa el componente de login
+import Login from './components/Login'; // Asegúrate de que el nombre y la ruta sean correctos
 
 function App() {
   return (
