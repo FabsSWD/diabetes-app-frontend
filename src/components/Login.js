@@ -1,39 +1,26 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import { TextField, Button, Box, Typography, Container, Link } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      // Primero, verifica si el usuario existe
-      const userExistsResponse = await axios.get('http://localhost:8085/user/exists', {
-        params: {
-          username: username,
-        },
-      });
-
-      if (!userExistsResponse.data) {
-        setError('User does not exist');
-        return;
-      }
-
-      // Si el usuario existe, valida la contraseña
-      const response = await axios.post('http://localhost:8085/user/validate', null, {
-        params: {
-          username: username,
-          password: password,
-        },
+      const response = await axios.post('http://localhost:8085/user/validate', {
+        username: username,
+        password: password,
       });
 
       if (response.data === true) {
-        // Redireccionar o indicar inicio de sesión exitoso
-        alert('Login successful');
+        setError('');
+        navigate('/reset-password'); // Cambiado para que vaya a reset-password si no existe /dashboard
       } else {
-        setError('Invalid password');
+        setError('Invalid username or password');
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -51,7 +38,7 @@ export default function Login() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           <TextField
@@ -90,8 +77,11 @@ export default function Login() {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleLogin}
           >
-            Sign In
+            Login
           </Button>
+          <Link href="/reset-password" variant="body2">
+            Forgot your password?
+          </Link>
         </Box>
       </Box>
     </Container>

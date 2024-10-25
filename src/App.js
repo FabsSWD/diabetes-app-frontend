@@ -1,8 +1,7 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Appbar from './components/Appbar';
-import Login from './components/Login'; // Asegúrate de que el nombre y la ruta sean correctos
+import Login from './components/Login';
+import { ResetPassword } from './components/Resetpassword'; // Corregido: utilizar una exportación nombrada
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
         <Appbar />
         <Routes>
           <Route path="/login" element={<Login />} />
-          {/* Puedes agregar más rutas aquí si es necesario */}
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </div>
     </Router>
