@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,12 +14,14 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { UserContext } from '../context/UserContext';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 export default function Appbar() {
   const navigate = useNavigate();
+  const { user, logout } = useContext(UserContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,7 +42,12 @@ export default function Appbar() {
   };
 
   const handleLoginClick = () => {
-    navigate('/login'); // Navegación al hacer clic en Login
+    navigate('/login');
+  };
+
+  const handleLogoutClick = () => {
+    logout();
+    navigate('/');
   };
 
   return (
@@ -129,9 +137,18 @@ export default function Appbar() {
               </Button>
             ))}
           </Box>
-          <Button color="inherit" onClick={handleLoginClick}>
-            Login
-          </Button>
+
+          {/* Mostrar Login o Logout según el estado del usuario */}
+          {!user ? (
+            <Button color="inherit" onClick={handleLoginClick}>
+              Login
+            </Button>
+          ) : (
+            <Button color="inherit" onClick={handleLogoutClick}>
+              Logout
+            </Button>
+          )}
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

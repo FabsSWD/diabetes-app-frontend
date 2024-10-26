@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TextField, Button, Box, Typography, Container, Link } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(UserContext); // Obtener la función login del contexto
 
   const handleLogin = async () => {
     try {
@@ -18,7 +20,8 @@ export default function Login() {
 
       if (response.data === true) {
         setError('');
-        navigate('/reset-password'); // Cambiado para que vaya a reset-password si no existe /dashboard
+        login({ username }); // Guardar el usuario en el contexto
+        navigate('/'); // Redirigir a la Landing Page o la página principal
       } else {
         setError('Invalid username or password');
       }
