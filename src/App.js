@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Appbar from './components/Appbar';
 import Login from './components/Login';
+import './App.css';
 import { ResetPassword } from './components/Resetpassword'; // Corregido: utilizar una exportación nombrada
 
 function App() {

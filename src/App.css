@@ -1,38 +1,73 @@
+/* Contenedor principal */
 .App {
   text-align: center;
+  background-color: #f8f9fa; /* Fondo gris claro y limpio */
+  color: #2d3e50; /* Texto en gris oscuro */
 }
 
+/* Logo */
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
+  animation: App-logo-spin infinite 10s linear;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
+/* Header */
 .App-header {
-  background-color: #282c34;
+  background-color: #e8f0ed; /* Verde muy suave */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(12px + 1.5vmin);
+  color: #2d3e50;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 }
 
+/* Link */
 .App-link {
-  color: #61dafb;
+  color: #e38a8a; /* Rosa claro en enlaces */
+  text-decoration: none;
+  font-weight: 500;
 }
 
+.App-link:hover {
+  color: #c76e6e; /* Rosa oscuro en hover */
+  text-decoration: underline;
+}
+
+/* Botones */
+button {
+  background-color: #a8d5ba; /* Verde pastel */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #8bbca1; /* Verde más oscuro en hover */
+}
+
+/* Animación */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Media query para reducir el movimiento */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 10s linear;
   }
 }
