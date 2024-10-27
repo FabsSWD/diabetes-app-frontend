@@ -3,6 +3,7 @@ import Appbar from './components/Appbar';
 import Login from './components/Login';
 import LandingPage from './components/LandingPage'; // Importar LandingPage
 import './App.css';
+import Register  from './components/Register';
 import { ResetPassword } from './components/Resetpassword';
 import { UserProvider } from './context/UserContext';
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} /> {/* Ruta para LandingPage */}
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </div>

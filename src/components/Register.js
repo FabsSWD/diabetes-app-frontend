@@ -1,37 +1,39 @@
-import React, { useState, useContext } from 'react';
-import { TextField, Button, Box, Typography, Container, Link } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
-  const { login } = useContext(UserContext);
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:8085/user/validate', {
+      const response = await axios.post('http://localhost:8085/user/add', {
         username: username,
         password: password,
       });
 
-      if (response.data === true) {
+      if (response.status === 200) {
+        setSuccessMessage('Account created successfully!');
         setError('');
-        login({ username });
-        navigate('/'); // Redirige a la Landing Page o la página principal
+        // Redirige a la página de login después de unos segundos o al hacer clic en un botón
+        setTimeout(() => navigate('/login'), 2000);
       } else {
-        setError('Invalid username or password');
+        setError('Failed to create account. Please try again.');
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
     }
-  };
-
-  const handleRegister = () => {
-    navigate('/register'); // Redirige a la página de registro
   };
 
   return (
@@ -45,7 +47,7 @@ export default function Login() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Login
+          Register
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           <TextField
@@ -68,13 +70,30 @@ export default function Login() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+            autoComplete="new-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           {error && (
             <Typography color="error" variant="body2">
               {error}
+            </Typography>
+          )}
+          {successMessage && (
+            <Typography color="primary" variant="body2">
+              {successMessage}
             </Typography>
           )}
           <Button
@@ -82,22 +101,16 @@ export default function Login() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={handleLogin}
-          >
-            Login
-          </Button>
-          <Link href="/reset-password" variant="body2" sx={{ mb: 2 }}>
-            Forgot your password?
-          </Link>
-          <Typography variant="body2" sx={{ mt: 2, mb: 2, textAlign: 'center' }}>
-            — OR —
-          </Typography>
-          <Button
-            fullWidth
-            variant="outlined"
             onClick={handleRegister}
           >
             Register
+          </Button>
+          <Button
+            fullWidth
+            variant="text"
+            onClick={() => navigate('/login')}
+          >
+            Back to Login
           </Button>
         </Box>
       </Box>
