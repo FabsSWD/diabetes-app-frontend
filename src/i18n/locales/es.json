@@ -52,6 +52,7 @@
       "downloadCSV": "Descargar CSV",
       "yes": "Si",
       "no": "No",
+      "pdfTitle": "Tabla de Predicciones",
       "columns": {
         "pregnancies": "Embarazos",
         "glucose": "Glucosa",
