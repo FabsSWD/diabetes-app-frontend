@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import App from './App';
 import './index.css';
 import { UserProvider } from './context/UserContext';
-import { BrowserRouter } from 'react-router-dom'; // Asegúrate de importar BrowserRouter
+import { BrowserRouter } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -47,7 +47,7 @@ const theme = createTheme({
 
 ReactDOM.render(
   <UserProvider>
-    <BrowserRouter> {/* Envuelve App en BrowserRouter */}
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>

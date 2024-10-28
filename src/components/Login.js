@@ -21,7 +21,7 @@ export default function Login() {
       if (response.data === true) {
         setError('');
         login({ username });
-        navigate('/'); // Redirige a la Landing Page o la página principal
+        navigate('/'); 
       } else {
         setError('Invalid username or password');
       }
@@ -31,7 +31,7 @@ export default function Login() {
   };
 
   const handleRegister = () => {
-    navigate('/register'); // Redirige a la página de registro
+    navigate('/register');
   };
 
   return (

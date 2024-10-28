@@ -26,7 +26,6 @@ export default function Register() {
       if (response.status === 200) {
         setSuccessMessage('Account created successfully!');
         setError('');
-        // Redirige a la página de login después de unos segundos o al hacer clic en un botón
         setTimeout(() => navigate('/login'), 2000);
       } else {
         setError('Failed to create account. Please try again.');

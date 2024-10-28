@@ -137,19 +137,18 @@ export default function Appbar() {
                   onClick={() => navigate('/predict')}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Realizar Predicción
+                  Make Prediction
                 </Button>
                 <Button
                   onClick={() => navigate('/predictions')}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Ver Predicciones
+                  Prediction Table
                 </Button>
               </>
             )}
           </Box>
 
-          {/* Mostrar Login o Logout según el estado del usuario */}
           {!user ? (
             <Button color="inherit" onClick={handleLoginClick}>
               Login

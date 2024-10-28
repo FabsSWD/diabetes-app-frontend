@@ -34,7 +34,7 @@ export default function PredictionsTable() {
       const response = await axios.get(endpoint);
       setPredictions(response.data);
     } catch (error) {
-      console.error('Error al obtener las predicciones', error);
+      console.error('Error gathering predictions', error);
     }
   }, [viewType, user]);
 
@@ -44,7 +44,7 @@ export default function PredictionsTable() {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-    doc.text('Predicciones de Diabetes', 20, 10);
+    doc.text('Diabetes Predictions', 20, 10);
     doc.autoTable({
       head: [['Pregnancies', 'Glucose', 'Blood Pressure', 'Skin Thickness', 'Insulin', 'BMI', 'Pedigree', 'Age', 'Diabetes']],
       body: predictions.map(pred => [
@@ -65,19 +65,19 @@ export default function PredictionsTable() {
   return (
     <Container component="main">
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
-        <Typography component="h1" variant="h5">Ver Predicciones</Typography>
+        <Typography component="h1" variant="h5">Prediction Table</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', mt: 3 }}>
           {user && (
             <Select value={viewType} onChange={(e) => setViewType(e.target.value)}>
-              <MenuItem value="own">Mis Predicciones</MenuItem>
-              <MenuItem value="public">Predicciones Públicas</MenuItem>
+              <MenuItem value="own">My Predictions</MenuItem>
+              <MenuItem value="public">Public Predictions</MenuItem>
             </Select>
           )}
-          <Button variant="contained" onClick={fetchPredictions}>Refrescar</Button>
-          <Button variant="contained" onClick={handleDownloadPDF}>Descargar PDF</Button>
+          <Button variant="contained" onClick={fetchPredictions}>Refresh</Button>
+          <Button variant="contained" onClick={handleDownloadPDF}>Download PDF</Button>
           <Button variant="contained">
             <CSVLink data={predictions} filename="predictions.csv" style={{ textDecoration: 'none', color: 'inherit' }}>
-              Descargar CSV
+              Download CSV
             </CSVLink>
           </Button>
         </Box>

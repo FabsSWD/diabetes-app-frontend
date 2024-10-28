@@ -22,31 +22,29 @@ export default function Prediction() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Validar rangos de valores específicos
     const parsedValue = parseFloat(value);
     const isValidValue = (field, val) => {
       switch (field) {
         case 'pregnancies':
         case 'age':
-          return val >= 0; // No permitir negativos
+          return val >= 0;
         case 'glucose':
-          return val >= 0 && val <= 500; // Ejemplo de rango para glucosa
+          return val >= 0 && val <= 500;
         case 'bloodPressure':
-          return val >= 0 && val <= 300; // Ejemplo de rango para presión sanguínea
+          return val >= 0 && val <= 300;
         case 'skinThickness':
-          return val >= 0 && val <= 99; // Grosor de piel en un rango razonable
+          return val >= 0 && val <= 99;
         case 'insulin':
-          return val >= 0 && val <= 900; // Ejemplo de rango para insulina
+          return val >= 0 && val <= 900;
         case 'bmi':
-          return val >= 0 && val <= 100; // BMI hasta 100
+          return val >= 0 && val <= 100;
         case 'diabetesPedigreeFunction':
-          return val >= 0 && val <= 2.5; // Ejemplo de función de pedigree de diabetes
+          return val >= 0 && val <= 2.5;
         default:
           return true;
       }
     };
 
-    // Actualizar el estado solo si el valor es válido
     if (isValidValue(name, parsedValue) || value === '') {
       setFormData({ ...formData, [name]: value });
     }
@@ -60,7 +58,7 @@ export default function Prediction() {
       });
       navigate('/predictions');
     } catch (error) {
-      console.error('Error al realizar la predicción', error);
+      console.error('Error developing prediction', error);
     }
   };
 
@@ -75,7 +73,7 @@ export default function Prediction() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Realizar Predicción
+          Make a Prediction
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           {[
@@ -113,7 +111,7 @@ export default function Prediction() {
                 color="primary"
               />
             }
-            label="Hacer predicción pública"
+            label="Public Prediction"
           />
           <Button
             type="button"
@@ -122,7 +120,7 @@ export default function Prediction() {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSubmit}
           >
-            Realizar Predicción
+            Predict
           </Button>
         </Box>
       </Box>

@@ -5,16 +5,17 @@ import Prediction from './components/Prediction';
 import PredictionsTable from './components/PredictionsTable';
 import { UserContext } from './context/UserContext';
 import Login from './components/Login';
+import { ResetPassword } from './components/ResetPassword';
+import Register from './components/Register';
 
-function App() {
+export default function App() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    // Si el usuario está loggeado y no está en la página de predicciones, redirige a /predictions
-    if (user && location.pathname === '/login') {
-      navigate('/predictions');
+    if (!user && location.pathname === '/') {
+      navigate('/login');
     }
   }, [user, navigate, location]);
 
@@ -22,13 +23,13 @@ function App() {
     <div className="App">
       <Appbar />
       <Routes>
+        <Route path="/" element={<PredictionsTable />} />
         <Route path="/predict" element={user ? <Prediction /> : <Navigate to="/login" />} />
-        <Route path="/predictions" element={<PredictionsTable />} />
-        <Route path="/login" element={!user ? <Login /> : <Navigate to="/predictions" />} />
-        <Route path="*" element={<Navigate to="/predictions" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );
 }
-
-export default App;
