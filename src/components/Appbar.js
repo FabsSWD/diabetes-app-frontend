@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -15,9 +15,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { UserContext } from '../context/UserContext';
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard'];
 
 export default function Appbar() {
   const navigate = useNavigate();
@@ -100,13 +97,19 @@ export default function Appbar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {user && (
+                <>
+                  <MenuItem onClick={() => navigate('/predict')}>
+                    <Typography textAlign="center">Realizar Predicción</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate('/predictions')}>
+                    <Typography textAlign="center">Ver Predicciones</Typography>
+                  </MenuItem>
+                </>
+              )}
             </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -126,16 +129,24 @@ export default function Appbar() {
           >
             Diabetes App
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            {user && (
+              <>
+                <Button
+                  onClick={() => navigate('/predict')}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Realizar Predicción
+                </Button>
+                <Button
+                  onClick={() => navigate('/predictions')}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Ver Predicciones
+                </Button>
+              </>
+            )}
           </Box>
 
           {/* Mostrar Login o Logout según el estado del usuario */}
@@ -171,11 +182,15 @@ export default function Appbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Account</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Dashboard</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

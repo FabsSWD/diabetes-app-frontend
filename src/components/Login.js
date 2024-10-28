@@ -26,7 +26,7 @@ export default function Login() {
         setError('Invalid username or password');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('An error occurred. Please try again. ' +err);
     }
   };
 

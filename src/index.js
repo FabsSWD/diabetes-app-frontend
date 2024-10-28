@@ -3,23 +3,25 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import App from './App';
 import './index.css';
+import { UserProvider } from './context/UserContext';
+import { BrowserRouter } from 'react-router-dom'; // Asegúrate de importar BrowserRouter
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#a8d5ba', // Verde pastel para componentes principales
-      contrastText: '#ffffff', // Texto blanco sobre el fondo verde
+      main: '#a8d5ba',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#8bbca1', // Verde más oscuro para componentes secundarios
-      contrastText: '#ffffff', // Texto blanco sobre fondo secundario verde
+      main: '#8bbca1',
+      contrastText: '#ffffff',
     },
     background: {
-      default: '#f8f9fa', // Fondo general en gris claro
-      paper: '#e8f0ed', // Fondo para tarjetas y secciones en verde claro
+      default: '#f8f9fa',
+      paper: '#e8f0ed',
     },
     text: {
-      primary: '#37474f', // Texto en gris oscuro sobre fondos claros
+      primary: '#37474f',
     },
   },
   typography: {
@@ -28,7 +30,7 @@ const theme = createTheme({
     h1: {
       fontSize: '2rem',
       fontWeight: 600,
-      color: '#37474f', // Color para encabezados
+      color: '#37474f',
     },
     h2: {
       fontSize: '1.5rem',
@@ -44,8 +46,12 @@ const theme = createTheme({
 });
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>,
+  <UserProvider>
+    <BrowserRouter> {/* Envuelve App en BrowserRouter */}
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </UserProvider>,
   document.getElementById('root')
 );
