@@ -7,6 +7,7 @@ import { UserContext } from './context/UserContext';
 import Login from './components/Login';
 import { ResetPassword } from './components/ResetPassword';
 import Register from './components/Register';
+import UserProfile from './components/UserProfile'; // Import the new component
 
 export default function App() {
   const { user } = useContext(UserContext);
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/userprofile" element={<UserProfile />} /> {/* New User Profile Route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
