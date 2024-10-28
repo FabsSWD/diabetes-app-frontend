@@ -15,12 +15,13 @@ import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
 import { UserContext } from '../context/UserContext';
 import { useTranslation } from 'react-i18next';
-import { Select, MenuItem } from '@mui/material';
+import esFlag from '../assets/es-flag.png';
+import usFlag from '../assets/us-flag.png';
 
 export default function Appbar() {
   const navigate = useNavigate();
   const { user, logout } = useContext(UserContext);
-  const { t, i18n } = useTranslation(); // Importación de traducción
+  const { t, i18n } = useTranslation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -41,11 +42,11 @@ export default function Appbar() {
   };
 
   const handleAvatarClick = () => {
-    navigate('/userprofile'); // Redirects to UserProfile.js when avatar is clicked
+    navigate('/userprofile');
   };
 
-  const handleLanguageChange = (event) => {
-    i18n.changeLanguage(event.target.value); // Cambio de idioma
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en');
   };
 
   return (
@@ -166,15 +167,13 @@ export default function Appbar() {
                 <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            {/* Selector de idioma */}
-            <Select
-              value={i18n.language}
-              onChange={handleLanguageChange}
-              sx={{ ml: 2, color: 'white', borderColor: 'white' }}
-            >
-              <MenuItem value="en">English</MenuItem>
-              <MenuItem value="es">Español</MenuItem>
-            </Select>
+            <IconButton onClick={toggleLanguage} sx={{ ml: 2 }}>
+              <img
+                src={i18n.language === 'en' ? usFlag : esFlag}
+                alt="flag"
+                style={{ width: '24px', height: '24px' }}
+              />
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>
