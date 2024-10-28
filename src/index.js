@@ -1,3 +1,4 @@
+import './i18n/i18n'; // Asegúrate de que la ruta sea correcta según tu estructura
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';

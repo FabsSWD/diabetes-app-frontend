@@ -1,0 +1,84 @@
+{
+    "appbar": {
+      "title": "Diabetes App",
+      "login": "Iniciar sesión",
+      "logout": "Cerrar sesión",
+      "userProfile": "Perfil de usuario",
+      "makePrediction": "Realizar predicción",
+      "predictionTable": "Tabla de predicciones"
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "username": "Nombre de usuario",
+      "password": "Contraseña",
+      "loginButton": "Iniciar sesión",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "or": "o",
+      "registerPrompt": "Regístrate",
+      "errorInvalid": "Nombre de usuario o contraseña incorrectos",
+      "errorOccurred": "Ocurrió un error. Por favor, inténtalo de nuevo."
+    },
+    "register": {
+      "title": "Registrarse",
+      "username": "Nombre de usuario",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "registerButton": "Registrarse",
+      "backToLogin": "Volver al inicio de sesión",
+      "errorMismatch": "Las contraseñas no coinciden",
+      "errorOccurred": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+      "success": "¡Cuenta creada exitosamente!"
+    },
+    "prediction": {
+      "title": "Realizar una predicción",
+      "pregnancies": "Embarazos",
+      "glucose": "Glucosa",
+      "bloodPressure": "Presión sanguínea",
+      "skinThickness": "Grosor de piel",
+      "insulin": "Insulina",
+      "bmi": "IMC",
+      "diabetesPedigreeFunction": "Función Pedigrí de Diabetes",
+      "age": "Edad",
+      "isPublic": "Predicción pública",
+      "predictButton": "Predecir",
+      "errorOccurred": "Error al desarrollar la predicción"
+    },
+    "predictionsTable": {
+      "title": "Tabla de predicciones",
+      "myPredictions": "Mis Predicciones",
+      "publicPredictions": "Predicciones Públicas",
+      "refresh": "Actualizar",
+      "downloadPDF": "Descargar PDF",
+      "downloadCSV": "Descargar CSV",
+      "yes": "Si",
+      "no": "No",
+      "columns": {
+        "pregnancies": "Embarazos",
+        "glucose": "Glucosa",
+        "bloodPressure": "Presión sanguínea",
+        "skinThickness": "Grosor de piel",
+        "insulin": "Insulina",
+        "bmi": "IMC",
+        "pedigree": "Pedigrí",
+        "age": "Edad",
+        "diabetes": "Diabetes"
+      }
+    },
+    "resetPassword": {
+      "title": "Restablecer contraseña",
+      "username": "Nombre de usuario",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "resetButton": "Restablecer contraseña",
+      "errorMismatch": "Las contraseñas no coinciden",
+      "success": "La contraseña se ha restablecido con éxito"
+    },
+    "userProfile": {
+      "title": "Perfil de usuario",
+      "username": "Nombre de usuario",
+      "logoutButton": "Cerrar sesión",
+      "notLoggedIn": "Usuario no ha iniciado sesión",
+      "loginPrompt": "Ir al inicio de sesión"
+    }
+  }
+  

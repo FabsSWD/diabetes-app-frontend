@@ -3,8 +3,10 @@ import { TextField, Button, Box, Container, Typography, Switch, FormControlLabel
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Prediction() {
+  const { t } = useTranslation(); // Importación de traducción
   const { user } = useContext(UserContext);
   const [formData, setFormData] = useState({
     pregnancies: '',
@@ -58,7 +60,7 @@ export default function Prediction() {
       });
       navigate('/predictions');
     } catch (error) {
-      console.error('Error developing prediction', error);
+      console.error(t('prediction.errorOccurred'), error);
     }
   };
 
@@ -73,18 +75,18 @@ export default function Prediction() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Make a Prediction
+          {t('prediction.title')}
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           {[
-            { name: 'pregnancies', label: 'Pregnancies', min: 0 },
-            { name: 'glucose', label: 'Glucose', min: 0, max: 500 },
-            { name: 'bloodPressure', label: 'Blood Pressure', min: 0, max: 300 },
-            { name: 'skinThickness', label: 'Skin Thickness', min: 0, max: 99 },
-            { name: 'insulin', label: 'Insulin', min: 0, max: 900 },
-            { name: 'bmi', label: 'BMI', min: 0, max: 100 },
-            { name: 'diabetesPedigreeFunction', label: 'Diabetes Pedigree Function', min: 0, max: 2.5 },
-            { name: 'age', label: 'Age', min: 0 },
+            { name: 'pregnancies', label: t('prediction.pregnancies'), min: 0 },
+            { name: 'glucose', label: t('prediction.glucose'), min: 0, max: 500 },
+            { name: 'bloodPressure', label: t('prediction.bloodPressure'), min: 0, max: 300 },
+            { name: 'skinThickness', label: t('prediction.skinThickness'), min: 0, max: 99 },
+            { name: 'insulin', label: t('prediction.insulin'), min: 0, max: 900 },
+            { name: 'bmi', label: t('prediction.bmi'), min: 0, max: 100 },
+            { name: 'diabetesPedigreeFunction', label: t('prediction.diabetesPedigreeFunction'), min: 0, max: 2.5 },
+            { name: 'age', label: t('prediction.age'), min: 0 },
           ].map((field) => (
             <TextField
               key={field.name}
@@ -111,7 +113,7 @@ export default function Prediction() {
                 color="primary"
               />
             }
-            label="Public Prediction"
+            label={t('prediction.isPublic')}
           />
           <Button
             type="button"
@@ -120,7 +122,7 @@ export default function Prediction() {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSubmit}
           >
-            Predict
+            {t('prediction.predictButton')}
           </Button>
         </Box>
       </Box>

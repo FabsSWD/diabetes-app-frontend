@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Register() {
+  const { t } = useTranslation(); // Importación de traducción
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,7 +15,7 @@ export default function Register() {
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('register.errorMismatch'));
       return;
     }
 
@@ -24,14 +26,14 @@ export default function Register() {
       });
 
       if (response.status === 200) {
-        setSuccessMessage('Account created successfully!');
+        setSuccessMessage(t('register.success'));
         setError('');
         setTimeout(() => navigate('/login'), 2000);
       } else {
-        setError('Failed to create account. Please try again.');
+        setError(t('register.errorOccurred'));
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError(t('register.errorOccurred'));
     }
   };
 
@@ -46,7 +48,7 @@ export default function Register() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Register
+          {t('register.title')}
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           <TextField
@@ -54,7 +56,7 @@ export default function Register() {
             required
             fullWidth
             id="username"
-            label="Username"
+            label={t('register.username')}
             name="username"
             autoComplete="username"
             autoFocus
@@ -66,7 +68,7 @@ export default function Register() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t('register.password')}
             type="password"
             id="password"
             autoComplete="new-password"
@@ -78,7 +80,7 @@ export default function Register() {
             required
             fullWidth
             name="confirmPassword"
-            label="Confirm Password"
+            label={t('register.confirmPassword')}
             type="password"
             id="confirmPassword"
             autoComplete="new-password"
@@ -102,14 +104,14 @@ export default function Register() {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleRegister}
           >
-            Register
+            {t('register.registerButton')}
           </Button>
           <Button
             fullWidth
             variant="text"
             onClick={() => navigate('/login')}
           >
-            Back to Login
+            {t('register.backToLogin')}
           </Button>
         </Box>
       </Box>

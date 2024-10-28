@@ -1,10 +1,11 @@
-// src/components/UserProfile.js
 import React, { useContext } from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const UserProfile = () => {
+  const { t } = useTranslation(); // Importación de traducción
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -17,9 +18,9 @@ const UserProfile = () => {
     return (
       <Container component="main" maxWidth="xs">
         <Box sx={{ mt: 8, textAlign: 'center' }}>
-          <Typography variant="h5">User not logged in</Typography>
+          <Typography variant="h5">{t('userProfile.notLoggedIn')}</Typography>
           <Button variant="contained" onClick={() => navigate('/login')} sx={{ mt: 2 }}>
-            Go to Login
+            {t('userProfile.loginPrompt')}
           </Button>
         </Box>
       </Container>
@@ -29,12 +30,12 @@ const UserProfile = () => {
   return (
     <Container component="main" maxWidth="xs">
       <Box sx={{ mt: 8, textAlign: 'center' }}>
-        <Typography variant="h4">User Profile</Typography>
+        <Typography variant="h4">{t('userProfile.title')}</Typography>
         <Typography variant="h6" sx={{ mt: 2 }}>
-          Username: {user.username}
+          {t('userProfile.username')}: {user.username}
         </Typography>
         <Button variant="contained" onClick={handleLogout} sx={{ mt: 3 }}>
-          Logout
+          {t('userProfile.logoutButton')}
         </Button>
       </Box>
     </Container>

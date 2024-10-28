@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 export function ResetPassword() {
+  const { t } = useTranslation(); // Importación de traducción
   const [username, setUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -11,7 +13,7 @@ export function ResetPassword() {
 
   const handleResetPassword = async () => {
     if (newPassword !== confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('resetPassword.errorMismatch'));
       return;
     }
 
@@ -24,14 +26,14 @@ export function ResetPassword() {
       });         
 
       if (response.data === true) {
-        setSuccess('Password has been successfully reset');
+        setSuccess(t('resetPassword.success'));
         setError('');
       } else {
-        setError('Failed to reset password. Please try again.');
+        setError(t('resetPassword.errorOccurred'));
         setSuccess('');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.' + err);
+      setError(t('resetPassword.errorOccurred') + err);
       setSuccess('');
     }
   };
@@ -47,7 +49,7 @@ export function ResetPassword() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Reset Password
+          {t('resetPassword.title')}
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           <TextField
@@ -55,7 +57,7 @@ export function ResetPassword() {
             required
             fullWidth
             id="username"
-            label="Username"
+            label={t('resetPassword.username')}
             name="username"
             autoComplete="username"
             autoFocus
@@ -67,7 +69,7 @@ export function ResetPassword() {
             required
             fullWidth
             name="newPassword"
-            label="New Password"
+            label={t('resetPassword.newPassword')}
             type="password"
             id="new-password"
             value={newPassword}
@@ -78,7 +80,7 @@ export function ResetPassword() {
             required
             fullWidth
             name="confirmPassword"
-            label="Confirm Password"
+            label={t('resetPassword.confirmPassword')}
             type="password"
             id="confirm-password"
             value={confirmPassword}
@@ -101,7 +103,7 @@ export function ResetPassword() {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleResetPassword}
           >
-            Reset Password
+            {t('resetPassword.resetButton')}
           </Button>
         </Box>
       </Box>

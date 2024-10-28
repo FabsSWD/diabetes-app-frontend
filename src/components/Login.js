@@ -3,8 +3,10 @@ import { TextField, Button, Box, Typography, Container, Link } from '@mui/materi
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
+  const { t } = useTranslation(); // Importación de traducción
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,10 +25,10 @@ export default function Login() {
         login({ username });
         navigate('/'); 
       } else {
-        setError('Invalid username or password');
+        setError(t('login.errorInvalid'));
       }
     } catch (err) {
-      setError('An error occurred. Please try again. ' +err);
+      setError(t('login.errorOccurred') + err);
     }
   };
 
@@ -45,7 +47,7 @@ export default function Login() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Login
+          {t('login.title')}
         </Typography>
         <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
           <TextField
@@ -53,7 +55,7 @@ export default function Login() {
             required
             fullWidth
             id="username"
-            label="Username"
+            label={t('login.username')}
             name="username"
             autoComplete="username"
             autoFocus
@@ -65,7 +67,7 @@ export default function Login() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t('login.password')}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -84,20 +86,20 @@ export default function Login() {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleLogin}
           >
-            Login
+            {t('login.loginButton')}
           </Button>
           <Link href="/reset-password" variant="body2" sx={{ mb: 2 }}>
-            Forgot your password?
+            {t('login.forgotPassword')}
           </Link>
           <Typography variant="body2" sx={{ mt: 2, mb: 2, textAlign: 'center' }}>
-            — OR —
+            — {t('login.or')} —
           </Typography>
           <Button
             fullWidth
             variant="outlined"
             onClick={handleRegister}
           >
-            Register
+            {t('login.registerPrompt')}
           </Button>
         </Box>
       </Box>

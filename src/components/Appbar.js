@@ -14,10 +14,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
 import { UserContext } from '../context/UserContext';
+import { useTranslation } from 'react-i18next';
+import { Select, MenuItem } from '@mui/material';
 
 export default function Appbar() {
   const navigate = useNavigate();
   const { user, logout } = useContext(UserContext);
+  const { t, i18n } = useTranslation(); // Importación de traducción
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -41,6 +44,10 @@ export default function Appbar() {
     navigate('/userprofile'); // Redirects to UserProfile.js when avatar is clicked
   };
 
+  const handleLanguageChange = (event) => {
+    i18n.changeLanguage(event.target.value); // Cambio de idioma
+  };
+
   return (
     <AppBar position="static" sx={{ backgroundColor: '#a8d5ba' }}>
       <Container maxWidth="xl">
@@ -61,7 +68,7 @@ export default function Appbar() {
               textDecoration: 'none',
             }}
           >
-            Diabetes App
+            {t('appbar.title')}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -94,10 +101,10 @@ export default function Appbar() {
               {user && (
                 <>
                   <Button onClick={() => navigate('/predict')}>
-                    Realizar Predicción
+                    {t('appbar.makePrediction')}
                   </Button>
                   <Button onClick={() => navigate('/predictions')}>
-                    Ver Predicciones
+                    {t('appbar.predictionTable')}
                   </Button>
                 </>
               )}
@@ -121,7 +128,7 @@ export default function Appbar() {
               textDecoration: 'none',
             }}
           >
-            Diabetes App
+            {t('appbar.title')}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -131,13 +138,13 @@ export default function Appbar() {
                   onClick={() => navigate('/predict')}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Make Prediction
+                  {t('appbar.makePrediction')}
                 </Button>
                 <Button
                   onClick={() => navigate('/predictions')}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Prediction Table
+                  {t('appbar.predictionTable')}
                 </Button>
               </>
             )}
@@ -145,20 +152,29 @@ export default function Appbar() {
 
           {!user ? (
             <Button color="inherit" onClick={handleLoginClick}>
-              Login
+              {t('appbar.login')}
             </Button>
           ) : (
             <Button color="inherit" onClick={handleLogoutClick}>
-              Logout
+              {t('appbar.logout')}
             </Button>
           )}
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="User Profile">
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', ml: 2 }}>
+            <Tooltip title={t('appbar.userProfile')}>
               <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
                 <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            {/* Selector de idioma */}
+            <Select
+              value={i18n.language}
+              onChange={handleLanguageChange}
+              sx={{ ml: 2, color: 'white', borderColor: 'white' }}
+            >
+              <MenuItem value="en">English</MenuItem>
+              <MenuItem value="es">Español</MenuItem>
+            </Select>
           </Box>
         </Toolbar>
       </Container>

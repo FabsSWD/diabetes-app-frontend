@@ -19,8 +19,10 @@ import { UserContext } from '../context/UserContext';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { CSVLink } from 'react-csv';
+import { useTranslation } from 'react-i18next';
 
 export default function PredictionsTable() {
+  const { t } = useTranslation(); // Importación de traducción
   const { user } = useContext(UserContext);
   const [predictions, setPredictions] = useState([]);
   const [viewType, setViewType] = useState(user ? 'own' : 'public'); // Mostrar 'public' si no está loggeado
@@ -34,9 +36,9 @@ export default function PredictionsTable() {
       const response = await axios.get(endpoint);
       setPredictions(response.data);
     } catch (error) {
-      console.error('Error gathering predictions', error);
+      console.error(t('predictionsTable.errorFetching'), error);
     }
-  }, [viewType, user]);
+  }, [viewType, user, t]);
 
   useEffect(() => {
     fetchPredictions();
@@ -44,9 +46,19 @@ export default function PredictionsTable() {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-    doc.text('Diabetes Predictions', 20, 10);
+    doc.text(t('predictionsTable.pdfTitle'), 20, 10);
     doc.autoTable({
-      head: [['Pregnancies', 'Glucose', 'Blood Pressure', 'Skin Thickness', 'Insulin', 'BMI', 'Pedigree', 'Age', 'Diabetes']],
+      head: [[
+        t('predictionsTable.columns.pregnancies'),
+        t('predictionsTable.columns.glucose'),
+        t('predictionsTable.columns.bloodPressure'),
+        t('predictionsTable.columns.skinThickness'),
+        t('predictionsTable.columns.insulin'),
+        t('predictionsTable.columns.bmi'),
+        t('predictionsTable.columns.pedigree'),
+        t('predictionsTable.columns.age'),
+        t('predictionsTable.columns.diabetes')
+      ]],
       body: predictions.map(pred => [
         pred.pregnancies,
         pred.glucose,
@@ -56,7 +68,7 @@ export default function PredictionsTable() {
         pred.bmi,
         pred.diabetesPedigreeFunction,
         pred.age,
-        pred.diabetes ? 'Yes' : 'No'
+        pred.diabetes ? t('predictionsTable.yes') : t('predictionsTable.no')
       ]),
     });
     doc.save('predictions.pdf');
@@ -65,19 +77,19 @@ export default function PredictionsTable() {
   return (
     <Container component="main">
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
-        <Typography component="h1" variant="h5">Prediction Table</Typography>
+        <Typography component="h1" variant="h5">{t('predictionsTable.title')}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', mt: 3 }}>
           {user && (
             <Select value={viewType} onChange={(e) => setViewType(e.target.value)}>
-              <MenuItem value="own">My Predictions</MenuItem>
-              <MenuItem value="public">Public Predictions</MenuItem>
+              <MenuItem value="own">{t('predictionsTable.myPredictions')}</MenuItem>
+              <MenuItem value="public">{t('predictionsTable.publicPredictions')}</MenuItem>
             </Select>
           )}
-          <Button variant="contained" onClick={fetchPredictions}>Refresh</Button>
-          <Button variant="contained" onClick={handleDownloadPDF}>Download PDF</Button>
+          <Button variant="contained" onClick={fetchPredictions}>{t('predictionsTable.refresh')}</Button>
+          <Button variant="contained" onClick={handleDownloadPDF}>{t('predictionsTable.downloadPDF')}</Button>
           <Button variant="contained">
             <CSVLink data={predictions} filename="predictions.csv" style={{ textDecoration: 'none', color: 'inherit' }}>
-              Download CSV
+              {t('predictionsTable.downloadCSV')}
             </CSVLink>
           </Button>
         </Box>
@@ -85,15 +97,15 @@ export default function PredictionsTable() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Pregnancies</TableCell>
-                <TableCell>Glucose</TableCell>
-                <TableCell>Blood Pressure</TableCell>
-                <TableCell>Skin Thickness</TableCell>
-                <TableCell>Insulin</TableCell>
-                <TableCell>BMI</TableCell>
-                <TableCell>Pedigree</TableCell>
-                <TableCell>Age</TableCell>
-                <TableCell>Diabetes</TableCell>
+                <TableCell>{t('predictionsTable.columns.pregnancies')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.glucose')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.bloodPressure')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.skinThickness')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.insulin')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.bmi')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.pedigree')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.age')}</TableCell>
+                <TableCell>{t('predictionsTable.columns.diabetes')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -107,7 +119,7 @@ export default function PredictionsTable() {
                   <TableCell>{pred.bmi}</TableCell>
                   <TableCell>{pred.diabetesPedigreeFunction}</TableCell>
                   <TableCell>{pred.age}</TableCell>
-                  <TableCell>{pred.diabetes ? 'Yes' : 'No'}</TableCell>
+                  <TableCell>{pred.diabetes ? t('predictionsTable.yes') : t('predictionsTable.no')}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

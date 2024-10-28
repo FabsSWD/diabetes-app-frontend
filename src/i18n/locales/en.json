@@ -1,0 +1,85 @@
+{
+    "appbar": {
+      "title": "Diabetes App",
+      "login": "Login",
+      "logout": "Logout",
+      "userProfile": "User Profile",
+      "makePrediction": "Make Prediction",
+      "predictionTable": "Prediction Table"
+    },
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "loginButton": "Login",
+      "forgotPassword": "Forgot your password?",
+      "or": "or",
+      "registerPrompt": "Register",
+      "errorInvalid": "Invalid username or password",
+      "errorOccurred": "An error occurred. Please try again."
+    },
+    "register": {
+      "title": "Register",
+      "username": "Username",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "registerButton": "Register",
+      "backToLogin": "Back to Login",
+      "errorMismatch": "Passwords do not match",
+      "errorOccurred": "An error occurred. Please try again.",
+      "success": "Account created successfully!"
+    },
+    "prediction": {
+      "title": "Make a Prediction",
+      "pregnancies": "Pregnancies",
+      "glucose": "Glucose",
+      "bloodPressure": "Blood Pressure",
+      "skinThickness": "Skin Thickness",
+      "insulin": "Insulin",
+      "bmi": "BMI",
+      "diabetesPedigreeFunction": "Diabetes Pedigree Function",
+      "age": "Age",
+      "isPublic": "Public Prediction",
+      "predictButton": "Predict",
+      "errorOccurred": "Error developing prediction"
+    },
+    "predictionsTable": {
+      "title": "Prediction Table",
+      "myPredictions": "My Predictions",
+      "publicPredictions": "Public Predictions",
+      "refresh": "Refresh",
+      "downloadPDF": "Download PDF",
+      "downloadCSV": "Download CSV",
+      "yes": "Yes",
+      "no": "No",
+      "columns": {
+        "pregnancies": "Pregnancies",
+        "glucose": "Glucose",
+        "bloodPressure": "Blood Pressure",
+        "skinThickness": "Skin Thickness",
+        "insulin": "Insulin",
+        "bmi": "BMI",
+        "pedigree": "Pedigree",
+        "age": "Age",
+        "diabetes": "Diabetes"
+      }
+      
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "username": "Username",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "resetButton": "Reset Password",
+      "errorMismatch": "Passwords do not match",
+      "success": "Password has been successfully reset"
+    },
+    "userProfile": {
+      "title": "User Profile",
+      "username": "Username",
+      "logoutButton": "Logout",
+      "notLoggedIn": "User not logged in",
+      "loginPrompt": "Go to Login"
+    }
+  }
+  
